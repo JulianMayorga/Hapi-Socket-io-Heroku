@@ -13,6 +13,7 @@ var config = {
         web: {
             $filter: 'env',
             test: 9090,
+            production: process.env.PORT,
             $default: 8080
         }
     }
