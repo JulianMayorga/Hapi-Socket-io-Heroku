@@ -1,7 +1,7 @@
 var Composer = require('./index');
 var SocketIO = require('socket.io');
 Composer(function(err, server) {
-    if(err) {
+    if (err) {
         throw err;
     }
     var io = SocketIO.listen(server.listener);
