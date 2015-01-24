@@ -1,7 +1,7 @@
 {
-  "name": "tateti-api",
+  "name": "hapi-socket.io-heroku",
   "version": "1.0.0",
-  "description": "Tateti",
+  "description": "Boilerplate",
   "main": "index.js",
   "scripts": {
     "start": "node server",
