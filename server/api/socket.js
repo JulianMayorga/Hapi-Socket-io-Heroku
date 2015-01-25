@@ -1,11 +1,11 @@
 var SocketIO = require('socket.io');
 
-var sendName = require('./sendName');
+var handlers = require('./handlers');
 
 var socket = {
     initialize: function initialize(listener) {
         this.io = SocketIO.listen(listener);
-        this.io.on('connection', sendName);
+        this.io.on('connection', handlers);
     }
 };
 
