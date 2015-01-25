@@ -1,15 +1,17 @@
 var Composer = require('./index');
-var SocketIO = require('socket.io');
+var Socket = require('./server/api/socket');
+
+var socket;
+
 Composer(function(err, server) {
     if (err) {
         throw err;
     }
-    var io = SocketIO.listen(server.listener);
-    io.sockets.on('connection', function(socket) {
-        socket.emit('socket:send:name', {
-            name: 'Bob'
-        });
-    });
+
+    socket = Object.create(Socket);
+
+    socket.initialize(server.listener);
+
     server.start(function() {
         console.log('Started the plot device.');
     });

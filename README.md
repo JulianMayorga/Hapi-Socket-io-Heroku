@@ -1,14 +1,6 @@
-# tateti-api
+# Hapi-Socket-io-Heroku
 
-Tateti
-
-
-## Usage
-
-```bash
-$ echo "details coming soon"
-```
-
+Boilerplate
 
 ## License
 
