@@ -14,7 +14,7 @@ var config = {
             $filter: 'env',
             test: 9090,
             production: process.env.PORT,
-            $default: 8080
+            $default: 8081
         }
     },
     db: {

@@ -1,20 +1,81 @@
 var Hoek = require('hoek');
+var Joi = require('joi');
+
+var Game = require('../models/Game');
 
 
-exports.register = function (server, options, next) {
+exports.register = function(server, options, next) {
 
-    options = Hoek.applyToDefaults({ basePath: '' }, options);
+    options = Hoek.applyToDefaults({
+        basePath: ''
+    }, options);
 
 
     server.route({
         method: 'GET',
-        path: options.basePath + '/',
-        handler: function (request, reply) {
+        path: options.basePath + '/games/{playerId}',
+        config: {
+            validate: {
+                params: {
+                    playerId: Joi.number().min(1).max(2)
+                }
+            }
+        },
+        handler: function(request, reply) {
 
-            var db = request.server.plugins['hapi-mongodb'].db;
-            db.collection('logs').insert({a: 23}, function (err, log) {
+            Game.findOne({}, function(err, game) {
 
-                reply({ message: 'Welcome to the plot device.' });
+                reply(game);
+            });
+        }
+    });
+
+    server.route({
+        method: 'PUT',
+        path: options.basePath + '/games/{playerId}',
+        config: {
+            validate: {
+                params: {
+                    playerId: Joi.number().min(1).max(2)
+                }
+            }
+        },
+        handler: function(request, reply) {
+
+            Game.findByIdAndUpdate(request.payload.id, {
+                $set: {
+                    board: request.payload.board,
+                    winner: request.payload.winner,
+                    nextTurn: request.payload.nextTurn
+                }
+            }, function(err, game) {
+
+                reply(game);
+            });
+        }
+    });
+
+    server.route({
+        method: 'POST',
+        path: options.basePath + '/games',
+        handler: function(request, reply) {
+
+            var emptyBoard = [
+                [null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null]
+            ];
+
+            Game.create({
+                winner: null,
+                nextTurn: 1,
+                board: emptyBoard
+            }, function(err, game) {
+
+                reply(game);
             });
         }
     });

@@ -26,18 +26,14 @@ var manifest = {
     }],
     plugins: {
         'visionary': {
-            engines: { jade: 'jade' },
+            engines: {
+                jade: 'jade'
+            },
             path: './server/web'
         },
-        'hapi-mongodb': {
-            'url': Config.get('/db/url'),
-            'settings': {
-                'db': {
-                    'native_parser': false
-                }
-            }
+        './server/api/index': {
+            basePath: '/api'
         },
-        './server/api/index': { basePath: '/api' },
         './server/web/index': {}
     }
 };
@@ -46,13 +42,13 @@ var manifest = {
 var store = new Confidence.Store(manifest);
 
 
-exports.get = function (key) {
+exports.get = function(key) {
 
     return store.get(key, criteria);
 };
 
 
-exports.meta = function (key) {
+exports.meta = function(key) {
 
     return store.meta(key, criteria);
 };
