@@ -8,7 +8,7 @@ var Socket = require('../../../server/api/socket');
 
 
 var lab = exports.lab = Lab.script();
-var request, server, client, socketURL, options;
+var client, options, request, server, socket, socketURL;
 
 
 lab.beforeEach(function (done) {
@@ -20,12 +20,18 @@ lab.beforeEach(function (done) {
     socket.initialize(server.listener);
 
     socketURL = server.info.uri;
-    options ={
+    options = {
         transports: ['websocket'],
         forceNew: true
     };
-    
+
     server.start(done);
+});
+
+lab.afterEach(function (done) {
+
+    client.disconnect();
+    done();
 });
 
 
@@ -37,7 +43,7 @@ lab.experiment('Socket', function () {
 
         done();
     });
-    
+
     lab.afterEach(function (done) {
 
         client.disconnect();

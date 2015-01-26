@@ -29,6 +29,14 @@ var manifest = {
             engines: { jade: 'jade' },
             path: './server/web'
         },
+        'hapi-mongodb': {
+            'url': Config.get('/db/url'),
+            'settings': {
+                'db': {
+                    'native_parser': false
+                }
+            }
+        },
         './server/api/index': { basePath: '/api' },
         './server/web/index': {}
     }

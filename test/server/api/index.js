@@ -1,5 +1,7 @@
 var Lab = require('lab');
 var Code = require('code');
+var HapiMongoDB = require('hapi-mongodb');
+
 var Config = require('../../../config');
 var Hapi = require('hapi');
 var IndexPlugin = require('../../../server/api/index');
@@ -11,7 +13,7 @@ var request, server;
 
 lab.beforeEach(function (done) {
 
-    var plugins = [ IndexPlugin ];
+    var plugins = [ IndexPlugin, HapiMongoDB ];
     server = new Hapi.Server();
     server.connection({ port: Config.get('/port/web') });
     server.register(plugins, function (err) {

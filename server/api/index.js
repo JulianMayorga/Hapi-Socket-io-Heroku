@@ -11,7 +11,11 @@ exports.register = function (server, options, next) {
         path: options.basePath + '/',
         handler: function (request, reply) {
 
-            reply({ message: 'Welcome to the plot device.' });
+            var db = request.server.plugins['hapi-mongodb'].db;
+            db.collection('logs').insert({a: 23}, function (err, log) {
+
+                reply({ message: 'Welcome to the plot device.' });
+            });
         }
     });
 

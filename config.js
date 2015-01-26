@@ -16,6 +16,13 @@ var config = {
             production: process.env.PORT,
             $default: 8080
         }
+    },
+    db: {
+        url: {
+            $filter: 'env',
+            production: process.env.MONGOLAB_URI,
+            $default: 'mongodb://localhost:27017/hapi-socket'
+        }
     }
 };
 
