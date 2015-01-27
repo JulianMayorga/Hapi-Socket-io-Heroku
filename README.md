@@ -1,10 +1,4 @@
-# Hapi-Socket-io-Heroku
-
-Backend development boilerplate based on hapi-style yeoman generator.
-
-* Framework: HapiJS
-* Transport layer: Socket.io
-* Hosting: Heroku
+# Connect Four API
 
 ## Getting started
 
